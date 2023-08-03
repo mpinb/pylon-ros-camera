@@ -35,7 +35,9 @@ if(CMAKE_BUILD_TYPE MATCHES Debug)
 endif()
 
 find_package(Pylon QUIET)
-if (NOT ${Pylon_FOUND})
+
+# Temporary fix for issue: https://github.com/basler/pylon-ros-camera/issues/160
+if (NOT ${Pylon_FOUND} OR "$ENV{Pylon_INCLUDE_DIRS}" STREQUAL "")
     include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/FindPylon.cmake")
 endif()
 # message("->    Pylon include directories: ${Pylon_INCLUDE_DIRS}")
